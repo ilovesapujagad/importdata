@@ -77,5 +77,51 @@ def sourcecode():
     except:
         return jsonify({"msg": "error json input"}), 400
 
+@app.post("/api/importsc/python/")
+def importpython():
+    filess = request.files['file']
+    name = request.form['name']
+    try:
+        url = 'https://ezpdlqrjcm.function.microgen.id/api/login'
+        response1 = requests.post(url,data={'username': 'admin', 'password':'admin'})
+        source = str(response1.json()["Set-Cookie"])
+        try:
+            url1 = 'https://ezpdlqrjcm.function.microgen.id/api/createnote?'+source+''
+            response2 = requests.post(url1,json={"name":str(name)})
+            data = response2.json()
+            sdata = str(data["body"])
+            try:
+                text1 = "%md"
+                url3 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'?'+source+''
+                responseget = requests.get(url3)
+                data = responseget.json()
+                paragraphid = str(data["body"]["paragraphs"][0]["id"])
+                url4 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
+                responseput = requests.put(url4,json={"text":str(text1)})
+                try:
+                    
+                    text = filess.read()
+                    xx = text.decode("utf-8")
+                    xxx = "%python\r\n\r\n"
+                    zzzz = xxx+xx
+                    texts = {}
+                    texts['text']= zzzz
+                    texts['title'] = "Paragraph insert revised"
+                    url2 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
+                    response3 = requests.post(url2,json=texts)
+                    url = "https://sapujagad.id/sjnotebook/"+sdata+""
+                    my_dict = {}
+                    my_dict['Url']= url
+                    xs = make_response(my_dict)
+                    return xs
+                except:
+                    return jsonify({"msg": "Missing create paragraph code"}), 500
+            except:
+                return jsonify({"msg": "Missing update paragraph code"}), 500
+        except:
+            return jsonify({"msg": "Missing create note"}), 500
+    except:
+        return jsonify({"msg": "Missing Authorization"}), 400
+
 if __name__ == "__main__":
     app.run(debug=True)
