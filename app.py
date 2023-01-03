@@ -45,19 +45,19 @@ def sourcecode():
                 sdata = str(data["body"])
                 try:
                     text1 = "%md"
-                    url3 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'?'+source+''
+                    url3 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'?'+source+''
                     responseget = requests.get(url3)
                     data = responseget.json()
                     paragraphid = str(data["body"]["paragraphs"][0]["id"])
-                    url4 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
+                    url4 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
                     responseput = requests.put(url4,json={"text":str(text1)})
                     try:
                         text = "%jdbc(hive)\nLOAD DATA INPATH '"+path_file+"' INTO TABLE "+database+"."+table+"\n"
-                        url2 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
+                        url2 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
                         response3 = requests.post(url2,json={"title": "Paragraph insert revised","text":text })
                         try:
                             text12 = "%jdbc(hive)\nselect * from "+database+"."+table+"\n"
-                            url12 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
+                            url12 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
                             response1 = requests.post(url12,json={"title": "Paragraph insert revised","text":text12 })
                             url = "https://sapujagad.id/sjnotebook/"+sdata+""
                             my_dict = {}
@@ -82,21 +82,21 @@ def importpython():
     filess = request.files['file']
     name = request.form['name']
     try:
-        url = 'https://ezpdlqrjcm.function.microgen.id/api/login'
+        url = 'https://ipqlftmgzk.function.microgen.id/api/login'
         response1 = requests.post(url,data={'username': 'admin', 'password':'admin'})
         source = str(response1.json()["Set-Cookie"])
         try:
-            url1 = 'https://ezpdlqrjcm.function.microgen.id/api/createnote?'+source+''
+            url1 = 'https://ipqlftmgzk.function.microgen.id/api/createnote?'+source+''
             response2 = requests.post(url1,json={"name":str(name)})
             data = response2.json()
             sdata = str(data["body"])
             try:
                 text1 = "%md"
-                url3 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'?'+source+''
+                url3 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'?'+source+''
                 responseget = requests.get(url3)
                 data = responseget.json()
                 paragraphid = str(data["body"]["paragraphs"][0]["id"])
-                url4 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
+                url4 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
                 responseput = requests.put(url4,json={"text":str(text1)})
                 try:
                     
@@ -107,7 +107,7 @@ def importpython():
                     texts = {}
                     texts['text']= zzzz
                     texts['title'] = "Paragraph insert revised"
-                    url2 = 'https://ezpdlqrjcm.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
+                    url2 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
                     response3 = requests.post(url2,json=texts)
                     url = "https://sapujagad.id/sjnotebook/"+sdata+""
                     my_dict = {}
