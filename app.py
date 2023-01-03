@@ -35,11 +35,11 @@ def sourcecode():
         if not name:
             return jsonify({"msg": "Missing name parameter"}), 400
         try:
-            url = 'https://ezpdlqrjcm.function.microgen.id/api/login'
+            url = 'https://ipqlftmgzk.function.microgen.id/api/login'
             response1 = requests.post(url,data={'username': 'admin', 'password':'admin'})
             source = str(response1.json()["Set-Cookie"])
             try:
-                url1 = 'https://ezpdlqrjcm.function.microgen.id/api/createnote?'+source+''
+                url1 = 'https://ipqlftmgzk.function.microgen.id/api/createnote?'+source+''
                 response2 = requests.post(url1,json={"name":str(name)})
                 data = response2.json()
                 sdata = str(data["body"])
