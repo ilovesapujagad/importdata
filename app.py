@@ -16,6 +16,32 @@ api_base_url = "https://api.stagingv3.microgen.id/query/api/v1/" + api_key
 def hello_geek():
     return '<h1>Hello from Flask</h2>'
 
+
+@app.post("/api/importnote")
+def importnote():
+    source = str(request.args.get('JSESSIONID'))
+    filex = request.files['file']
+    name = request.form['name']
+    cookies = f"JSESSIONID={source}"
+    text = filex.read()
+    xx = json.loads(text)
+    print(cookies)
+    try:
+        response2 = requests.post('https://ipqlftmgzk.function.microgen.id/api/createnote?'+cookies+'',json={"name":str(name)})
+        data = response2.json()
+        sdata = str(data["body"])
+        try:
+            for  paragraphs in xx['paragraphs']:
+                text= str(paragraphs['text'])
+                texts= "Paragraph insert revised"
+                url2 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+cookies+''
+                response3 = requests.post(url2,json={"title": texts,"text":text })
+            return data    
+        except:
+            return jsonify({"msg": "error paragraph"}), 400
+    except:
+        return jsonify({"msg": "error create notebook"}), 400
+
 @app.post("/api/create/sourcecode")
 def sourcecode():
     try:
