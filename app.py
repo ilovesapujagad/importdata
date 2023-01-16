@@ -133,14 +133,13 @@ def sourcecode():
     except:
         return jsonify({"msg": "error json input"}), 400
 
-@app.post("/api/importsc/python/")
+@app.post("/api/importsc/python")
 def importpython():
     filess = request.files['file']
     name = request.form['name']
     try:
-        url = 'https://ipqlftmgzk.function.microgen.id/api/login'
-        response1 = requests.post(url,data={'username': 'admin', 'password':'admin'})
-        source = str(response1.json()["Set-Cookie"])
+        cookies = str(request.args.get('JSESSIONID'))
+        source = f"JSESSIONID={cookies}"
         try:
             url1 = 'https://ipqlftmgzk.function.microgen.id/api/createnote?'+source+''
             response2 = requests.post(url1,json={"name":str(name)})
