@@ -129,7 +129,7 @@ def sourcecode():
                 except:
                     return jsonify({"msg": "Missing update paragraph code"}), 500
             except:
-                return jsonify({"msg": "Missing create note"}), 500
+                return jsonify({"msg": "Missing create note Check username/password"}), 400
         except:
             return jsonify({"msg": "Missing Authorization"}), 400
     except:
