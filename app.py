@@ -94,7 +94,7 @@ def sourcecode():
             return jsonify({"msg": "Missing name parameter"}), 400
         try:
             url = 'https://ipqlftmgzk.function.microgen.id/api/login'
-            response1 = requests.post(url,data={'username': zepPass, 'password':zepUser})
+            response1 = requests.post(url,data={'username':zepUser , 'password':zepPass})
             source = str(response1.json()["Set-Cookie"])
             try:
                 url1 = 'https://ipqlftmgzk.function.microgen.id/api/createnote?'+source+''
