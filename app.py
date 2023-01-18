@@ -82,6 +82,8 @@ def sourcecode():
         table = request_data['table']
         path_file = request_data['path_file']
         name = request_data['name']
+        zepPass = str(request_data['zepPass'])
+        zepUser = str(request_data['zepUser'])
         if not database:
             return jsonify({"msg": "Missing database parameter"}), 400
         if not table:
@@ -92,7 +94,7 @@ def sourcecode():
             return jsonify({"msg": "Missing name parameter"}), 400
         try:
             url = 'https://ipqlftmgzk.function.microgen.id/api/login'
-            response1 = requests.post(url,data={'username': 'admin', 'password':'admin'})
+            response1 = requests.post(url,data={'username': zepPass, 'password':zepUser})
             source = str(response1.json()["Set-Cookie"])
             try:
                 url1 = 'https://ipqlftmgzk.function.microgen.id/api/createnote?'+source+''
