@@ -109,6 +109,8 @@ def sourcecode():
                     paragraphid = str(data["body"]["paragraphs"][0]["id"])
                     url4 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph/'+paragraphid+'?'+source+''
                     responseput = requests.put(url4,json={"text":str(text1)})
+                    urlrun = 'https://ipqlftmgzk.function.microgen.id/api/notebook/run/'+sdata+'/'+paragraphid+'?'+source+''
+                    responserun = requests.post(urlrun)
                     try:
                         text = "%jdbc(hive)\nLOAD DATA INPATH '"+path_file+"' INTO TABLE "+database+"."+table+"\n"
                         url2 = 'https://ipqlftmgzk.function.microgen.id/api/notebook/'+sdata+'/paragraph?'+source+''
